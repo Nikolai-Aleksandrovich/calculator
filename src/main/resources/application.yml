@@ -1,0 +1,11 @@
+logging:
+  path: /var/logs/
+  file: Calculator.log
+  #日志文件写道/var/logs/的Calculator.log
+  level:
+    root: WARN
+    #root logging设置为WARN级别
+    org:
+      springframework:
+        security: DEBUG
+        #将Spring Security的日志级别调整到DEBUG
