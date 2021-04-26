@@ -1,4 +1,10 @@
 spring:
+  rabbitmq:
+    remplate:
+      receive-timeout: 30000
+  kafka:
+    template:
+      default-topic: calculator.scoredetails.topic
   data:
     rest:
       base-path: /api
@@ -13,7 +19,12 @@ logging:
       springframework:
         security: DEBUG
         #将Spring Security的日志级别调整到DEBUG
-
+calculator:
+  email: imap.calculator.com
+  mailbox: INBOX
+  username: score-in-flow
+  password: 1L0v3T4c0s
+  poll-rate: 10000
 ---
 spring:
   profiles:
@@ -23,3 +34,22 @@ spring:
     port: 61617
     user: boss
     password: 16tm61n
+  rabbitmq:
+    host: rabbit.calculator.com
+    port: 5673
+    username: boss
+    password: 16tm61n
+    template:
+      exchange: calculator.scoredetails
+      routing-key: receiver.default
+  kafka:
+    bootstrap-servers:
+      - kafka.calculator.com:9092
+      - kafka.calculator.com:9093
+      - kafka.calculator.com:9094
+calculator:
+  email: imap.calculator.com
+  mailbox: INBOX
+  username: score-in-flow
+  password: 1L0v3T4c0s
+  poll-rate: 10000
