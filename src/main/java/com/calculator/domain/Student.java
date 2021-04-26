@@ -18,8 +18,8 @@ import java.util.UUID;
  */
 @Data
 @Entity
-@RestResource(rel = "student",path = "student")
-public class Student extends Auditable<Long>{
+@RestResource(rel = "students",path = "students")
+public class Student extends Auditable<UUID>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

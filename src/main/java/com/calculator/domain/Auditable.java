@@ -19,8 +19,8 @@ import java.util.Date;
  * @author Yuyuan Huang
  * @create 2021-04-24 23:55
  */
-@Getter(AccessLevel.PROTECTED)
-@Setter(AccessLevel.PROTECTED)
+@Getter(AccessLevel.PUBLIC)
+@Setter(AccessLevel.PUBLIC)
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public  class Auditable<U> {

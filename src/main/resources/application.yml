@@ -1,7 +1,11 @@
+spring:
+  data:
+    rest:
+      base-path: /api
 logging:
   path: /var/logs/
   file: Calculator.log
-  #日志文件写道/var/logs/的Calculator.log
+  #日志文件写入/var/logs/的Calculator.log
   level:
     root: WARN
     #root logging设置为WARN级别
@@ -9,3 +13,13 @@ logging:
       springframework:
         security: DEBUG
         #将Spring Security的日志级别调整到DEBUG
+
+---
+spring:
+  profiles:
+    - prod
+  artemis:
+    host: artemis.calculator.com
+    port: 61617
+    user: boss
+    password: 16tm61n
