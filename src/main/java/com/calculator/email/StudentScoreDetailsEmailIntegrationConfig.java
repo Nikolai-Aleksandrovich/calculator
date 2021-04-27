@@ -24,12 +24,12 @@ public class StudentScoreDetailsEmailIntegrationConfig {
             return new GenericMessage<>(studentScoreDetail);
         };
     }
-    @Bean
-    @ServiceActivator(inputChannel = "scoredetailsChannel",outputChannel = "calculateScoreChannel")
-    public GenericHandler<Long> scoreHandler(StudentScoreDetailRepository studentScoreDetailRepository){
-        Long score =
-        return (payload,headers) -> {return studentScoreDetailRepository.save(payload);};
-
-    }
+//    @Bean
+//    @ServiceActivator(inputChannel = "scoredetailsChannel",outputChannel = "calculateScoreChannel")
+//    public GenericHandler<Long> scoreHandler(StudentScoreDetailRepository studentScoreDetailRepository){
+//        Long score =
+//        return (payload,headers) -> {return studentScoreDetailRepository.save(payload);};
+//
+//    }
 
 }
