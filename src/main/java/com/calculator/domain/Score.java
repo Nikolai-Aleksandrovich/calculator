@@ -13,10 +13,10 @@ import java.util.UUID;
  * @author Yuyuan Huang
  * @create 2021-04-26 23:19
  */
-@EqualsAndHashCode(callSuper = true)
+
 @Entity
 @Data
-public class Score extends Auditable<UUID>{
+public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

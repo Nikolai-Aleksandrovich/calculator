@@ -1,8 +1,10 @@
 package com.calculator.domain;
 
 import lombok.Data;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.*;
+
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
@@ -11,15 +13,17 @@ import java.io.Serializable;
  * @create 2021-04-25 2:41
  */
 @Data
-@Entity
-@Table(name = "Student_Score")
-public class StudentScoreDetail extends Auditable<Long> implements Serializable {
+@Document
+public class StudentScoreDetail  implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
-    @ManyToOne
+    @ManyToMany
     private User user;
+
+    @OneToOne
+    private String studentId;
 
     @NotBlank(message = "请选择孩子的入学年份")
     private String startYear;

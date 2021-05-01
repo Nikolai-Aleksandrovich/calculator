@@ -1,11 +1,12 @@
 package com.calculator.domain;
 
-import lombok.Data;
-import lombok.Generated;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,10 +21,12 @@ import java.util.UUID;
  */
 
 @Data
-public class User extends Auditable<UUID> implements UserDetails {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true,access = AccessLevel.PRIVATE)
+@Document
+public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id;
 
     private final String username;
     private final String password;
@@ -32,12 +35,24 @@ public class User extends Auditable<UUID> implements UserDetails {
     private final String district;
     private final String street;
     private final String phonenumber;
+    private final Collection<GrantedAuthority> role;
+
+
+    public UserDetail toUserDetail(PasswordEncoder passwordEncoder){
+        return new UserDetail(username, passwordEncoder.encode(password), fullname, city, district, street, phonenumber,role);
+
+    }
+
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority("USER"));
+    }
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -64,4 +79,6 @@ public class User extends Auditable<UUID> implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
